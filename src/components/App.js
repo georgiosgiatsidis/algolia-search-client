@@ -4,19 +4,9 @@ const PropTypes = require('prop-types');
 const importJsx = require('import-jsx');
 const { Box } = require('ink');
 const { search } = require('../services/algolia');
+const { sanitize } = require('../helpers/utils');
 
 const Table = importJsx('./Table');
-
-const sanitize = (arr) =>
-    arr.map((item) => {
-        return Object.keys(item).reduce((acc, curr) => {
-            if (typeof item[curr] !== 'object') {
-                acc[curr] = item[curr];
-            }
-
-            return acc;
-        }, {});
-    });
 
 const App = ({ query }) => {
     const [data, setData] = React.useState(null);
