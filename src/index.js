@@ -1,14 +1,8 @@
 const importJsx = require('import-jsx');
 const React = require('react');
-const yargs = require('yargs');
+const inquirer = require('inquirer');
 const { render } = require('ink');
 require('./config');
-
-const options = yargs
-    .usage('Usage: $0 [options]')
-    .help('h')
-    .alias('h', 'help')
-    .option('q', { alias: 'query', type: 'string', demandOption: true, describe: 'The search query parameter' }).argv;
 
 /**
  * Run the application
@@ -25,5 +19,14 @@ const run = async (query) => {
     }
 };
 
-const { query } = options;
-run(query);
+inquirer
+    .prompt([
+        {
+            type: 'input',
+            name: 'query',
+            message: 'Search something 🔎',
+        },
+    ])
+    .then(({ query }) => {
+        run(query);
+    });
