@@ -1,7 +1,22 @@
+/* eslint-disable react/no-array-index-key */
 const React = require('react');
 const PropTypes = require('prop-types');
-const { Box, Text } = require('ink');
+const importJsx = require('import-jsx');
+const { Box } = require('ink');
 const { search } = require('../services/algolia');
+
+const Table = importJsx('./Table');
+
+const sanitize = (arr) =>
+    arr.map((item) => {
+        return Object.keys(item).reduce((acc, curr) => {
+            if (typeof item[curr] !== 'object') {
+                acc[curr] = item[curr];
+            }
+
+            return acc;
+        }, {});
+    });
 
 const App = ({ query }) => {
     const [data, setData] = React.useState(null);
@@ -15,9 +30,11 @@ const App = ({ query }) => {
         searchData();
     }, []);
 
+    if (!data) return null;
+
     return (
-        <Box marginTop={1} marginBottom={1}>
-            <Text>{JSON.stringify(data, null, 2)}</Text>
+        <Box flexDirection="column" marginTop={1} marginBottom={1}>
+            <Table data={sanitize(data.hits)} />
         </Box>
     );
 };
