@@ -19,6 +19,7 @@
     "license": "MIT",
     "dependencies": {
         "algoliasearch": "^4.4.0",
+        "commander": "^6.1.0",
         "dotenv": "^8.2.0",
         "import-jsx": "^4.0.0",
         "ink": "^3.0.5",
