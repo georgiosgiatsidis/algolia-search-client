@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-    deploy:
+    test:
         if: github.ref == 'refs/heads/master'
         runs-on: ubuntu-latest
         strategy:
@@ -21,4 +21,4 @@ jobs:
               run: npm install
 
             - name: Lint the source code
-              run: npm lint
+              run: npm run lint
