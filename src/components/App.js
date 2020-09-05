@@ -2,18 +2,22 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const importJsx = require('import-jsx');
-const { Box } = require('ink');
+const { Box, Text } = require('ink');
 const { search } = require('../services/algolia');
 const { sanitize } = require('../helpers/utils');
 
 const Table = importJsx('./Table');
 
-const App = ({ query }) => {
+const App = ({ query, page }) => {
+    const options = {
+        page: page - 1,
+    };
+
     const [data, setData] = React.useState(null);
 
     React.useEffect(() => {
         const searchData = async () => {
-            const result = await search(query);
+            const result = await search(query, options);
             setData(result);
         };
 
@@ -24,13 +28,19 @@ const App = ({ query }) => {
 
     return (
         <Box flexDirection="column" marginTop={1} marginBottom={1}>
-            <Table data={sanitize(data.hits)} />
+            {data.hits.length === 0 ? (
+                <Text color="red">No results found, Try with another search term or another page number</Text>
+            ) : (
+                <Table data={sanitize(data.hits)} />
+            )}
+            {data.nbPages > 0 && <Text>Total Pages: {data.nbPages}</Text>}
         </Box>
     );
 };
 
 App.propTypes = {
     query: PropTypes.string,
+    page: PropTypes.number,
 };
 
 module.exports = App;
