@@ -12,8 +12,8 @@ const index = client.initIndex(config.indexName);
  *
  * @return {Promise<>}
  */
-const search = async (query, options) => {
-    return index.search(query, options);
+const search = async (query, options, searchFn = index.search) => {
+    return searchFn(query, options);
 };
 
 exports.search = search;

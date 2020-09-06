@@ -22,3 +22,6 @@ jobs:
 
             - name: Lint the source code
               run: npm run lint
+
+            - name: Run the tests
+              run: npm test
