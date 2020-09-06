@@ -25,3 +25,7 @@ jobs:
 
             - name: Run the tests
               run: npm test
+              env:
+                  APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+                  API_KEY: ${{ secrets.API_KEY }}
+                  INDEX_NAME: ${{ secrets.INDEX_NAME }}
