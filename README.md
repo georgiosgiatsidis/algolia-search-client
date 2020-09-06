@@ -13,7 +13,6 @@ A Node.js CLI search client for Algolia
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
@@ -51,6 +50,15 @@ cp .env.example .env
 ```
 
 and enter APPLICATION_ID, API_KEY and INDEX_NAME manually.
+
+Lint
+```sh
+npm run lint
+```
+Test
+```sh
+npm test
+```
 
 ## Usage
 
